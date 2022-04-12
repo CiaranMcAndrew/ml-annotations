@@ -1,4 +1,4 @@
-classdef RestMethod < annotations.AnnotatedMethod
+classdef Method < annotations.AnnotatedMethod
     
     properties
         QueryArgs
@@ -6,7 +6,7 @@ classdef RestMethod < annotations.AnnotatedMethod
     end
     
     methods
-        function this = RestMethod(varargin)
+        function this = Method(varargin)
             this = this@annotations.AnnotatedMethod(varargin{:});
             
             assert(numel(this.Annotations) == 1, ...

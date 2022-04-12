@@ -1,5 +1,4 @@
-classdef MyRestApi < annotations.mixin.RestApi
-
+classdef MyRestApi < annotations.mixin.rest.Api
 
     properties
         Objects = []
@@ -8,7 +7,6 @@ classdef MyRestApi < annotations.mixin.RestApi
 
     methods
         function this = MyRestApi()
-            % blank constructor
             this.StartTime = datetime;
         end
 
@@ -28,7 +26,5 @@ classdef MyRestApi < annotations.mixin.RestApi
             obj = findobj(this.Objects, "id", id);
             prop = obj.(property);
         end
-
     end
-
 end
