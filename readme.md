@@ -74,6 +74,7 @@ Annotations allow for simple creation of RESTful APIs from object code without t
 
 [`annotations.mixin.rest.Api`](src/+annotations/+mixin/+rest/Api.m) extends `annotations.mixin.Annotated` to provide capabilities to describe how MATLAB methods translate into RESTful interfaces.
 
+[`annotations.mixin.rest.Method`](src/+annotations/+mixin/+rest/Method.m) provide specific method level details about how a MATLAB method converts to a REST endpoint.
 
 Example [MyRestApi](examples/MyRestApi.m)
 ```matlab
