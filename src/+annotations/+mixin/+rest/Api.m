@@ -10,25 +10,8 @@ classdef Api < annotations.mixin.Annotated
         end
 
         function getOpenApiSpecification(this)
-
-            for m = this.getRestMethods()'
-                assert(numel(m.Annotations) == 1, ...
-                    "Found multiple REST signatures for method: " + ... 
-                    m.DefiningClass.Name + "." + m.Name)
-                
-                queryArgs = getQueryArgs(m.Annotations);
-
-
-
-            end
-
+            % TODO: Implement this
         end
-
     end
-
 end
 
-function args = getQueryArgs(annotation)
-exp = "(?<=\{}).+?(?=\})";
-args = regexp(annotation, exp, "match")';
-end
