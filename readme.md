@@ -183,7 +183,6 @@ ans = 2×1 string
 
 </td>
 </tr>
-
 <tr>
 <td style=vertical-align:top>
 
@@ -203,5 +202,20 @@ ans =
 
 </td>
 </tr>
+<tr>
+<td style=vertical-align:top>
 
+```matlab
+class(method.RequestMethod)
+```
+
+</td>
+<td style=vertical-align:top>
+
+```
+ans = 'matlab.net.http.RequestMethod' 
+```
+
+</td>
+</tr>
 </table>
