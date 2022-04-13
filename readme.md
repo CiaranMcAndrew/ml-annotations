@@ -31,7 +31,7 @@ end
 ```
 This adds annotations to the method `calculateArea`.
 
-The class [`AnnotedMethod`](src/+annotations/AnnotatedMethod.m) extends the built-in `meta.method`, and allows for inspection of annotations on methods.
+The class [`annotations.AnnotedMethod`](src/+annotations/AnnotatedMethod.m) extends the built-in `meta.method`, and allows for inspection of annotations on methods.
 
 Get method metadata as an `AnnotatedMethod`:
 ```matlab
