@@ -34,10 +34,12 @@ This adds annotations to the method `calculateArea`.
 The class [`annotations.AnnotedMethod`](src/+annotations/AnnotatedMethod.m) extends the built-in `meta.method`, and allows for inspection of annotations on methods.
 
 Get method metadata as an `AnnotatedMethod`:
+
 ```matlab
 obj = MyBasicClass;
 listmethods = obj.getAnnotatedMethods
 ```
+
 ```
 listmethods = 
   AnnotatedMethod with properties:
@@ -57,6 +59,7 @@ listmethods =
           DefiningClass: [1×1 meta.class]
 
 ```
+
 View annotation text:
 ```matlab
 disp(listmethods(1).Annotations)
@@ -110,7 +113,7 @@ Query REST methods:
 
 <table>
 <tr>
-<td>
+<td style=vertical-align:top>
 
 ```matlab
 restapi = MyRestApi;
@@ -119,7 +122,7 @@ method = rms(1)
 ```
 
 </td>
-<td>
+<td style=vertical-align:top>
 
 ```
 method = 
@@ -144,16 +147,15 @@ method =
 
 </td>
 </tr>
-
 <tr>
-<td>
+<td style=vertical-align:top>
 
 ```matlab
 class(method)
 ```
 
 </td>
-<td>
+<td style=vertical-align:top>
 
 ```
 ans = 'annotations.mixin.rest.Method'
@@ -163,14 +165,14 @@ ans = 'annotations.mixin.rest.Method'
 </tr>
 
 <tr>
-<td>
+<td style=vertical-align:top>
 
 ```matlab
 method.QueryArgs
 ```
 
 </td>
-<td>
+<td style=vertical-align:top>
 
 ```
 ans = 2×1 string    
@@ -182,14 +184,14 @@ ans = 2×1 string
 </tr>
 
 <tr>
-<td>
+<td style=vertical-align:top>
 
 ```matlab
 method.RequestMethod
 ```
 
 </td>
-<td>
+<td style=vertical-align:top>
 
 ```
 ans = 
