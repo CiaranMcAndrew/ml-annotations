@@ -24,6 +24,13 @@ classdef (Abstract) Parameter < matlab.mixin.Heterogeneous & handle
         function h = findobj(this, varargin)
             h = findobj@handle(this, varargin{:});
         end
+
+        function T = toTable(this)
+            s = warning;
+            warning('off', 'MATLAB:structOnObject');
+            T = struct2table(arrayfun(@struct, this));
+            warning(s);
+        end
     end
 
     methods

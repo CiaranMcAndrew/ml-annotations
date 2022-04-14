@@ -392,3 +392,12 @@ ans =
       Type: "BodyParameter"
 
 ```
+
+```matlab:Code
+method.Parameters.toTable
+```
+
+| |Method|Name|Type|
+|:--:|:--:|:--:|:--:|
+|1|1x1 Method|"name"|"PathParameter"|
+|2|1x1 Method|"object"|"BodyParameter"|
