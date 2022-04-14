@@ -357,8 +357,6 @@ method.PathParameters
 
 ```text:Output
 ans = 
-  PathParameter with properties:
-
     Method: [1x1 annotations.mixin.rest.Method]
       Name: "name"
       Type: "PathParameter"
@@ -370,13 +368,7 @@ method.QueryParameters
 ```
 
 ```text:Output
-ans = 
-
-  0x0 Parameter array with properties:
-
-    Method
-    Name
-    Type
+ans =   0x0 Parameter array
 ```
 
 ```matlab:Code
@@ -385,8 +377,6 @@ method.BodyParameters
 
 ```text:Output
 ans = 
-  BodyParameter with properties:
-
     Method: [1x1 annotations.mixin.rest.Method]
       Name: "object"
       Type: "BodyParameter"
@@ -394,10 +384,16 @@ ans =
 ```
 
 ```matlab:Code
-method.Parameters.toTable
+method.Parameters
 ```
 
-| |Method|Name|Type|
-|:--:|:--:|:--:|:--:|
-|1|1x1 Method|"name"|"PathParameter"|
-|2|1x1 Method|"object"|"BodyParameter"|
+```text:Output
+ans = 
+  2x1 Parameter array with properties:
+                 Method                    Name           Type      
+    _________________________________    ________    _______________
+
+    1x1 annotations.mixin.rest.Method    "name"      "PathParameter"
+    1x1 annotations.mixin.rest.Method    "object"    "BodyParameter"
+
+```

@@ -1,4 +1,4 @@
-classdef (Abstract) Parameter < matlab.mixin.Heterogeneous & handle
+classdef (Abstract) Parameter < matlab.mixin.Heterogeneous & matlab.mixin.CustomDisplay & handle
     %UNTITLED Summary of this class goes here
     %   Detailed explanation goes here
     
@@ -31,6 +31,26 @@ classdef (Abstract) Parameter < matlab.mixin.Heterogeneous & handle
             T = struct2table(arrayfun(@struct, this));
             warning(s);
         end
+    end
+
+    methods (Sealed, Access=protected)
+        function s = getHeader(this)
+            import matlab.mixin.CustomDisplay.*
+            s = "  " + convertDimensionsToString(this) + " " +  getClassNameForHeader(this) + " array";
+            if numel(this) > 0
+                s = s + " with properties:";
+            end
+        end
+
+        function displayNonScalarObject(this)
+            disp(this.getHeader);
+            disp(this.toTable);
+        end
+
+        function displayEmptyObject(this) 
+            disp(this.getHeader);
+        end
+        
     end
 
     methods
