@@ -19,7 +19,8 @@ classdef Method < annotations.AnnotatedMethod
         end
 
         function args = findPathParameters(this)
-            args = getPathParameters(this.Endpoint);
+            exp = "(?<=\{).+?(?=\})";
+            args = regexp(this.Endpoint, exp, "match")';
         end
     end
 
@@ -58,9 +59,4 @@ classdef Method < annotations.AnnotatedMethod
             method = matlab.net.http.RequestMethod.(str);
         end
     end
-end
-
-function args = getPathParameters(endpoint)
-exp = "(?<=\{).+?(?=\})";
-args = regexp(endpoint, exp, "match")';
 end
