@@ -1,4 +1,8 @@
 classdef Api < annotations.mixin.Annotated
+    
+    properties
+        ContentType = matlab.net.http.field.ContentTypeField('application/json');
+    end
 
     methods
         function this = Api()

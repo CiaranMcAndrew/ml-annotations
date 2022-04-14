@@ -1,7 +1,11 @@
 classdef Method < annotations.AnnotatedMethod
 
     properties
-        QueryArgs
+        Endpoint
+        Parameters
+        PathParameters
+        QueryParameters
+        BodyParameters
         RequestMethod
     end
 
@@ -13,11 +17,39 @@ classdef Method < annotations.AnnotatedMethod
                 "Found multiple REST signatures for method: " + ...
                 this.DefiningClass.Name + "." + this.Name)
         end
+
+        function args = findPathParameters(this)
+            args = getPathParameters(this.Endpoint);
+        end
     end
 
     methods % get;set
-        function args = get.QueryArgs(this)
-            args = getQueryArgs(this.Annotations);
+
+        function endpoint = get.Endpoint(this)
+            endpoint = this.Annotations;
+        end
+
+        function parameters = get.Parameters(this)
+            if isempty(this.Parameters)
+                parameters = annotations.mixin.rest.parameters.Parameter.empty();
+                for n = this.InputNames(2:end)'
+                    parameters = [parameters; annotations.mixin.rest.parameters.Parameter.FromMethod(this, string(n))];
+                end
+            else
+                parameters = this.Parameters;
+            end
+        end
+
+        function parameters = get.PathParameters(this)
+            parameters = findobj(this.Parameters, 'Class', 'annotations.mixin.rest.parameters.PathParameter');
+        end
+
+        function parameters = get.QueryParameters(this)
+            parameters = findobj(this.Parameters, 'Class', 'annotations.mixin.rest.parameters.QueryParameter');
+        end
+
+        function parameters = get.BodyParameters(this)
+            parameters = findobj(this.Parameters, 'Class', 'annotations.mixin.rest.parameters.BodyParameter');
         end
 
         function method = get.RequestMethod(this)
@@ -28,8 +60,7 @@ classdef Method < annotations.AnnotatedMethod
     end
 end
 
-function args = getQueryArgs(annotation)
+function args = getPathParameters(endpoint)
 exp = "(?<=\{).+?(?=\})";
-args = regexp(annotation, exp, "match")';
+args = regexp(endpoint, exp, "match")';
 end
-

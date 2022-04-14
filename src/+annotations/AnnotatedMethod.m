@@ -1,4 +1,4 @@
-classdef AnnotatedMethod 
+classdef AnnotatedMethod < handle
 
     properties
         Annotations
