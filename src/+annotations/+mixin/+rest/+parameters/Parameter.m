@@ -2,16 +2,12 @@ classdef (Abstract) Parameter < matlab.mixin.Heterogeneous & handle
     %UNTITLED Summary of this class goes here
     %   Detailed explanation goes here
     
-    properties
+    properties (SetAccess=protected)
         Method
         Name
+        Type
     end
 
-    properties (Hidden, SetAccess=private)
-        Class
-    end
-
-    
     methods
         function this = Parameter(method, name)
             arguments
@@ -31,8 +27,9 @@ classdef (Abstract) Parameter < matlab.mixin.Heterogeneous & handle
     end
 
     methods
-        function value = get.Class(this)
-            value = class(this);
+        function value = get.Type(this)
+            pat = lookBehindBoundary(".") + lettersPattern + textBoundary;
+            value = string(extract(class(this), pat));
         end
     end
 

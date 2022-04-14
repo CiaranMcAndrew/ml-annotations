@@ -41,15 +41,15 @@ classdef Method < annotations.AnnotatedMethod
         end
 
         function parameters = get.PathParameters(this)
-            parameters = findobj(this.Parameters, 'Class', 'annotations.mixin.rest.parameters.PathParameter');
+            parameters = findobj(this.Parameters, 'Type', 'PathParameter');
         end
 
         function parameters = get.QueryParameters(this)
-            parameters = findobj(this.Parameters, 'Class', 'annotations.mixin.rest.parameters.QueryParameter');
+            parameters = findobj(this.Parameters, 'Type', 'QueryParameter');
         end
 
         function parameters = get.BodyParameters(this)
-            parameters = findobj(this.Parameters, 'Class', 'annotations.mixin.rest.parameters.BodyParameter');
+            parameters = findobj(this.Parameters, 'Type', 'BodyParameter');
         end
 
         function method = get.RequestMethod(this)
