@@ -18,7 +18,7 @@ ans =
 
                    Name: 'calculateArea'
             Description: 'Calculates area (S)'
-    DetailedDescription: ' ↵  [Serializable]↵  [FieldName("Area")]↵  Area calculated by width x height.↵ ↵  See also MyOtherClass'
+    DetailedDescription: ' ↵  [Serializable]↵  [XmlElement(ElementName = "Area")]↵  Area calculated by width x height.↵ ↵  See also MyOtherClass'
                  Access: 'public'
                  Static: 0
                Abstract: 0
@@ -40,7 +40,7 @@ mc.MethodList(1).DetailedDescription
 ans = 
     ' 
        [Serializable]
-       [FieldName("Area")]
+       [XmlElement(ElementName = "Area")]
        Area calculated by width x height.
       
        See also MyOtherClass'
@@ -83,14 +83,12 @@ disp(listmethods(1).Annotations)
 
 ```matlab:Code
 classAnnotations = annotations.getAnnotationsForMethod(mc.MethodList(1));
+disp(classAnnotations)
 ```
 
 ```text:Output
-Invalid or deleted object.
-```
-
-```matlab:Code
-disp(classAnnotations)
+    "Serializable"
+    "XmlElement(ElementName = "Area")"
 ```
 
 ```matlab:Code
@@ -101,8 +99,9 @@ restapi = MyRestApi
 restapi = 
   MyRestApi with properties:
 
-      Objects: []
-    StartTime: 13-Apr-2022 00:00:45
+        Objects: []
+      StartTime: 14-Apr-2022 01:22:40
+    ContentType: [1x1 matlab.net.http.field.ContentTypeField]
 
 ```
 
@@ -111,7 +110,7 @@ restapi.main
 ```
 
 ```text:Output
-ans = "My example RESTful API. Started at: 13-Apr-2022 00:00:45"
+ans = "My example RESTful API. Started at: 14-Apr-2022 01:22:40"
 ```
 
 ```matlab:Code
@@ -120,7 +119,7 @@ annotatedMethods = restapi.getAnnotatedMethods
 
 ```text:Output
 annotatedMethods = 
-  2x1 AnnotatedMethod array with properties:
+  5x1 AnnotatedMethod array with properties:
 
     Annotations
     Name
@@ -146,18 +145,18 @@ annotatedMethods(1)
 ans = 
   AnnotatedMethod with properties:
 
-            Annotations: "GET(/objects/{id})"
-                   Name: 'getObject'
-            Description: '[GET(/objects/{id})]'
-    DetailedDescription: '  [SomeTag]'
+            Annotations: "GET(/objects/{id}/{property})"
+                   Name: 'getObjectProperty'
+            Description: '[GET(/objects/{id}/{property})]'
+    DetailedDescription: ''
                  Access: 'public'
                  Static: 0
                Abstract: 0
                  Sealed: 0
      ExplicitConversion: 0
                  Hidden: 0
-             InputNames: {2x1 cell}
-            OutputNames: {'obj'}
+             InputNames: {3x1 cell}
+            OutputNames: {'prop'}
           DefiningClass: [1x1 meta.class]
 
 ```
@@ -170,9 +169,9 @@ annotatedMethods(2)
 ans = 
   AnnotatedMethod with properties:
 
-            Annotations: "GET(/)"
-                   Name: 'main'
-            Description: '[GET(/)]'
+            Annotations: "POST(/object/{name})"
+                   Name: 'addObject'
+            Description: '[POST(/object/{name})]'
     DetailedDescription: ''
                  Access: 'public'
                  Static: 0
@@ -180,8 +179,8 @@ ans =
                  Sealed: 0
      ExplicitConversion: 0
                  Hidden: 0
-             InputNames: {'this'}
-            OutputNames: {'msg'}
+             InputNames: {3x1 cell}
+            OutputNames: {'status'}
           DefiningClass: [1x1 meta.class]
 
 ```
@@ -197,9 +196,10 @@ method =
   Method with properties:
 
                Endpoint: "GET(/objects/{id}/{property})"
-         PathParameters: [2x1 string]
-        QueryParameters: [2x1 string]
-         BodyParameters: []
+             Parameters: [2x1 annotations.mixin.rest.parameters.PathParameter]
+         PathParameters: [2x1 annotations.mixin.rest.parameters.PathParameter]
+        QueryParameters: [0x0 annotations.mixin.rest.parameters.PathParameter]
+         BodyParameters: [0x0 annotations.mixin.rest.parameters.PathParameter]
           RequestMethod: GET
             Annotations: "GET(/objects/{id}/{property})"
                    Name: 'getObjectProperty'
@@ -230,9 +230,12 @@ method.PathParameters
 ```
 
 ```text:Output
-ans = 2x1 string    
-"id"         
-"property"   
+ans = 
+  2x1 PathParameter array with properties:
+
+    Method
+    Name
+    Type
 
 ```
 
@@ -267,10 +270,10 @@ method =
   Method with properties:
 
                Endpoint: "GET(/objects)"
-             Parameters: {2x1 cell}
-         PathParameters: [0x0 string]
-        QueryParameters: [2x1 string]
-         BodyParameters: []
+             Parameters: [2x1 annotations.mixin.rest.parameters.QueryParameter]
+         PathParameters: [0x0 annotations.mixin.rest.parameters.QueryParameter]
+        QueryParameters: [2x1 annotations.mixin.rest.parameters.QueryParameter]
+         BodyParameters: [0x0 annotations.mixin.rest.parameters.QueryParameter]
           RequestMethod: GET
             Annotations: "GET(/objects)"
                    Name: 'getObjects'
@@ -295,7 +298,11 @@ method.PathParameters
 ```text:Output
 ans = 
 
-  0x0 empty string array
+  0x0 QueryParameter array with properties:
+
+    Method
+    Name
+    Type
 ```
 
 ```matlab:Code
@@ -303,9 +310,12 @@ method.QueryParameters
 ```
 
 ```text:Output
-ans = 2x1 string    
-"limit"      
-"skip"       
+ans = 
+  2x1 QueryParameter array with properties:
+
+    Method
+    Name
+    Type
 
 ```
 
@@ -351,6 +361,7 @@ ans =
 
     Method: [1x1 annotations.mixin.rest.Method]
       Name: "name"
+      Type: "PathParameter"
 
 ```
 
@@ -365,6 +376,7 @@ ans =
 
     Method
     Name
+    Type
 ```
 
 ```matlab:Code
@@ -377,5 +389,6 @@ ans =
 
     Method: [1x1 annotations.mixin.rest.Method]
       Name: "object"
+      Type: "BodyParameter"
 
 ```
