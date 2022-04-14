@@ -189,14 +189,17 @@ ans =
 ```matlab:Code
 restapi = MyRestApi;
 rms = restapi.getRestMethods;
-method = rms(1)
+method = findobj(rms, "Name", "getObjectProperty")
 ```
 
 ```text:Output
 method = 
   Method with properties:
 
-              QueryArgs: [2x1 string]
+               Endpoint: "GET(/objects/{id}/{property})"
+         PathParameters: [2x1 string]
+        QueryParameters: [2x1 string]
+         BodyParameters: []
           RequestMethod: GET
             Annotations: "GET(/objects/{id}/{property})"
                    Name: 'getObjectProperty'
@@ -223,7 +226,7 @@ ans = 'annotations.mixin.rest.Method'
 ```
 
 ```matlab:Code
-method.QueryArgs
+method.PathParameters
 ```
 
 ```text:Output
@@ -251,4 +254,128 @@ class(method.RequestMethod)
 
 ```text:Output
 ans = 'matlab.net.http.RequestMethod'
+```
+
+```matlab:Code
+restapi = MyRestApi;
+rms = restapi.getRestMethods;
+method = findobj(rms, "Name", "getObjects")
+```
+
+```text:Output
+method = 
+  Method with properties:
+
+               Endpoint: "GET(/objects)"
+             Parameters: {2x1 cell}
+         PathParameters: [0x0 string]
+        QueryParameters: [2x1 string]
+         BodyParameters: []
+          RequestMethod: GET
+            Annotations: "GET(/objects)"
+                   Name: 'getObjects'
+            Description: 'Gets all objects'
+    DetailedDescription: '  Returns objects from skip up to amount defined by limit↵  [GET(/objects)]'
+                 Access: 'public'
+                 Static: 0
+               Abstract: 0
+                 Sealed: 0
+     ExplicitConversion: 0
+                 Hidden: 0
+             InputNames: {3x1 cell}
+            OutputNames: {'col'}
+          DefiningClass: [1x1 meta.class]
+
+```
+
+```matlab:Code
+method.PathParameters
+```
+
+```text:Output
+ans = 
+
+  0x0 empty string array
+```
+
+```matlab:Code
+method.QueryParameters
+```
+
+```text:Output
+ans = 2x1 string    
+"limit"      
+"skip"       
+
+```
+
+```matlab:Code
+restapi = MyRestApi;
+rms = restapi.getRestMethods;
+method = findobj(rms, "Name", "addObject")
+```
+
+```text:Output
+method = 
+  Method with properties:
+
+               Endpoint: "POST(/object/{name})"
+             Parameters: [2x1 annotations.mixin.rest.parameters.Parameter]
+         PathParameters: [1x1 annotations.mixin.rest.parameters.PathParameter]
+        QueryParameters: [0x0 annotations.mixin.rest.parameters.Parameter]
+         BodyParameters: [1x1 annotations.mixin.rest.parameters.BodyParameter]
+          RequestMethod: POST
+            Annotations: "POST(/object/{name})"
+                   Name: 'addObject'
+            Description: '[POST(/object/{name})]'
+    DetailedDescription: ''
+                 Access: 'public'
+                 Static: 0
+               Abstract: 0
+                 Sealed: 0
+     ExplicitConversion: 0
+                 Hidden: 0
+             InputNames: {3x1 cell}
+            OutputNames: {'status'}
+          DefiningClass: [1x1 meta.class]
+
+```
+
+```matlab:Code
+method.PathParameters
+```
+
+```text:Output
+ans = 
+  PathParameter with properties:
+
+    Method: [1x1 annotations.mixin.rest.Method]
+      Name: "name"
+
+```
+
+```matlab:Code
+method.QueryParameters
+```
+
+```text:Output
+ans = 
+
+  0x0 Parameter array with properties:
+
+    Method
+    Name
+```
+
+```matlab:Code
+method.BodyParameters
+```
+
+```text:Output
+ans = 
+  BodyParameter with properties:
+
+    Method: [1x1 annotations.mixin.rest.Method]
+      Name: "object"
+
 ```
